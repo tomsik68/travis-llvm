@@ -3,7 +3,7 @@
 # This script makes travis use newer llvm than the defaultly installed one
 # Make sure to add sources to .travis.yml from this site: https://apt.llvm.org/
 
-if [ $# -lt 2 ]; then
+if [ $# -eq 0 ]; then
     echo "Usage: `basename $0` [llvm version] [-src]"
     exit 1
 fi
