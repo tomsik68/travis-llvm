@@ -15,8 +15,8 @@ add_src=$2
 # on real travis, it is recommended to use .travis.yml to add sources automatically
 if [[ $add_src == "-src" ]]; then
     # add deb source
-    echo "deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-${LLVM_VERSION} main" | sudo tee -a /etc/apt/sources.list
-    echo "deb-src http://apt.llvm.org/trusty/ llvm-toolchain-trusty-${LLVM_VERSION} main" | sudo tee -a /etc/apt/sources.list
+    echo "deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-${llvm_ver} main" | sudo tee -a /etc/apt/sources.list
+    echo "deb-src http://apt.llvm.org/trusty/ llvm-toolchain-trusty-${llvm_ver} main" | sudo tee -a /etc/apt/sources.list
     # add LLVM key
     wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
 fi
@@ -32,16 +32,16 @@ sudo apt remove llvm* libllvm*
 sudo apt update
 
 # install LLVM and clang
-sudo apt install llvm-${LLVM_VERSION}* libllvm${LLVM_VERSION} clang-${LLVM_VERSION}
+sudo apt install llvm-${llvm_ver}* libllvm${llvm_ver} clang-${llvm_ver}
 
 # symlink /usr/bin/ scripts containing llvm version number
-llvm_packages=`dpkg -l | grep llvm-${LLVM_VERSION} | awk '{print $2;}'`
+llvm_packages=`dpkg -l | grep llvm-${llvm_ver} | awk '{print $2;}'`
 # test scripts also need clang symlink
-llvm_packages="$llvm_packages clang-${LLVM_VERSION}"
+llvm_packages="$llvm_packages clang-${llvm_ver}"
 for pkg in $llvm_packages; do
     files=`dpkg -L $pkg | grep /usr/bin/`
     for file in $files; do
-        sudo ln -s $file ${file%-$LLVM_VERSION}
+        sudo ln -s $file ${file%-$llvm_ver}
     done
 done
 
