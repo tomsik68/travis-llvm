@@ -26,13 +26,13 @@ export PATH=`echo $PATH | sed -E 's/\/usr\/local\/clang-?(\w.)+//g'`
 sudo rm -rf /usr/local/clang*
 
 # delete all present LLVMs
-sudo apt remove llvm* libllvm*
+sudo apt-get remove llvm* libllvm*
 
 # update package index
-sudo apt update
+sudo apt-get update
 
 # install LLVM and clang
-sudo apt install llvm-${llvm_ver}* libllvm${llvm_ver} clang-${llvm_ver}
+sudo apt-get install llvm-${llvm_ver}* clang-${llvm_ver}
 
 # symlink /usr/bin/ scripts containing llvm version number
 llvm_packages=`dpkg -l | grep llvm-${llvm_ver} | awk '{print $2;}'`
