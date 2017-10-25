@@ -2,3 +2,6 @@
 
 sudo patch /usr/share/llvm-3.8/cmake/LLVMExports-relwithdebinfo.cmake llvmexports-3.8.patch
 sudo ln -s /usr/lib/llvm-3.8/lib/libLLVM-3.8.so /usr/lib/llvm-3.8/lib/libLLVM
+cd /usr/include/
+sudo ln -s /usr/include/llvm-c-3.8/llvm-c .
+cd -
