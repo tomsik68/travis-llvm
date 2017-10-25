@@ -39,10 +39,21 @@ llvm_packages=`dpkg -l | grep llvm-${llvm_ver} | awk '{print $2;}'`
 # test scripts also need clang symlink
 llvm_packages="$llvm_packages clang-${llvm_ver}"
 for pkg in $llvm_packages; do
-    files=`dpkg -L $pkg | grep /usr/bin/`
-    for file in $files; do
-        sudo ln -s $file ${file%-$llvm_ver}
+    executables=`dpkg -L $pkg | grep /usr/bin/`
+    libraries=`dpkg -L $pkg | grep -e '\.a' -e '\.so' -e '\.so.1'`
+    for exe in $executables; do
+        sudo ln -s $exe ${exe%-$llvm_ver}
     done
+
+    for lib in $libraries; do
+        sudo ln -s $lib /usr/lib
+    done
+
+    # if need polly fix
+    if [[ "$llvm_ver" == "3.8" ]]; then
+        sudo patch /usr/share/llvm-3.8/cmake/LLVMExports-relwithdebinfo.cmake llvmexports-3.8.patch
+    fi
+
 done
 
 # print llvm-config version
