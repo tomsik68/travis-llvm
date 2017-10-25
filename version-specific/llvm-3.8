@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sudo patch /usr/share/llvm-3.8/cmake/LLVMExports-relwithdebinfo.cmake llvmexports-3.8.patch
+sudo ln -s /usr/lib/llvm-3.8/lib/libLLVM-3.8.so /usr/lib/llvm-3.8/lib/libLLVM

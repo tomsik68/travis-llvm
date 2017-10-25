@@ -49,12 +49,10 @@ for pkg in $llvm_packages; do
         sudo ln -s $lib /usr/lib
     done
 
-    # if need polly fix
-    if [[ "$llvm_ver" == "3.8" ]]; then
-        sudo patch /usr/share/llvm-3.8/cmake/LLVMExports-relwithdebinfo.cmake llvmexports-3.8.patch
-    fi
-
 done
+if [ -x "version_specific/llvm-$llvm_ver" ]; then
+    . version_specific/llvm-$llvm_ver
+fi
 
 # print llvm-config version
 llvm-config --version
