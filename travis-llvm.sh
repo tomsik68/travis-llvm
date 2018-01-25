@@ -50,7 +50,11 @@ for pkg in $llvm_packages; do
     done
 
 done
-if [ -x "version_specific/llvm-$llvm_ver" ]; then
+
+if [ -f "version_specific/llvm-$llvm_ver" ]; then
+    if [ ! -x "version_specific/llvm-$llvm_ver" ]; then
+        chmod +x version_specific/llvm-$llvm_ver
+    fi
     . version_specific/llvm-$llvm_ver
 fi
 
