@@ -29,7 +29,7 @@ sudo rm -rf /usr/local/clang*
 sudo apt-get remove llvm* libllvm*
 
 # update package index
-sudo apt-get update
+sudo apt-get update --option Acquire::Retries=100 --option Acquire::http::Timeout="60"
 
 # install LLVM and clang
 sudo apt-get install llvm-${llvm_ver}* clang-${llvm_ver}
