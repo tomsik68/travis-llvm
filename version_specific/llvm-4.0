@@ -1,0 +1,8 @@
+#!/bin/bash
+sudo ln -s -T /usr/share/llvm-4.0 /usr/share/llvm
+sudo mkdir -p /usr/lib/cmake/
+sudo ln -s -T /usr/lib/llvm-4.0/cmake /usr/lib/cmake/llvm
+cd /usr/include
+sudo ln -s /usr/include/llvm-c-4.0/llvm-c .
+sudo ln -s /usr/include/llvm-4.0/llvm .
+cd -
